@@ -23,16 +23,9 @@ public class Card {
     }
 
     public String getName() { return name; }
+    public String getDescription() { return description; }
     public Orientation getOrientation() { return orientation; }
     public int getImageResId() { return imageResId; }
-
-    public boolean isDefense() {
-        return orientation == Orientation.DEFENSE;
-    }
-
-    public void setDefense(boolean defense) {
-        orientation = defense ? Orientation.DEFENSE : Orientation.ATTACK;
-    }
 }
 
 class MonsterCard extends Card {
@@ -82,24 +75,22 @@ class MonsterCard extends Card {
     }
 }
 
-class SpellCard extends Card {
+class MagicCard extends Card {
     private MonsterType affectedMonster;
     private int attackBoost;
     private int defenseBoost;
     private boolean isActive;
 
-    public SpellCard (
+    public MagicCard (
             String name,
             int imageResId,
             String description,
-            MonsterType affectedMonster,
-            int attackBoost,
-            int defenseBoost
+            MonsterType affectedMonster
     ) {
         super(name, imageResId, description);
         this.affectedMonster = affectedMonster;
-        this.attackBoost = attackBoost;
-        this.defenseBoost = defenseBoost;
+        this.attackBoost = 555;
+        this.defenseBoost = 555;
         this.isActive = false;
     }
 

@@ -32,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         phaseButton = findViewById(R.id.phase_button);
 
-        // Sample cards
-        deck.add(new Card("Akakieisu Monster", Card.CardType.MONSTER, R.drawable.akakieisu_monster, "Un hechicero que pronuncia encantamientos que pueden dejar inconsciente a un monstruo."));
-        deck.add(new Card("Acid Rain", Card.CardType.MAGIC, R.drawable.acid_rain_magic));
-        deck.add(new Card("Alexandrite Dragon Monster", Card.CardType.MONSTER, R.drawable.alexandrite_dragon_monster));
-        deck.add(new Card("Alien Shocktrooper Monster", Card.CardType.MONSTER, R.drawable.alien_shocktrooper_monster));
 
         phaseButton.setText("Draw Phase");
         phaseButton.setOnClickListener(v -> advancePhase());
@@ -65,18 +60,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Card createCard(String resourceName) {
-        Card.CardType type;
+        String[] parts = resourceName.split("_");
+        int resID = getResources().getIdentifier(resourceName, "drawable", getPackageName());
         if (resourceName.contains("_monster")) {
-            type = Card.CardType.MONSTER;
+            return new MonsterCard(
+                    parts[0],
+                    resID,
+                    parts[parts.length - 1],
+                    Integer.parseInt(parts[4]),
+                    Integer.parseInt(parts[5]),
+                    MonsterType.valueOf(parts[2]),
+                    MonsterAttribute.valueOf(parts[3])
+            );
         } else if (resourceName.contains("_trap")) {
-            type = Card.CardType.TRAP;
+            return new TrapCard(
+                    parts[0],
+                    resID,
+                    parts[parts.length - 1],
+                    MonsterAttribute.valueOf(parts[2])
+            );
         } else if (resourceName.contains("_magic")) {
-            type = Card.CardType.MAGIC;
-        } else {
-            type = Card.CardType.MONSTER;
+            return new MagicCard(
+                    parts[0],
+                    resID,
+                    parts[parts.length - 1],
+                    MonsterType.valueOf(parts[2])
+            );
         }
-        int resId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
-        return new Card(resourceName, type, resId);
     }
 
     private void setupAllowedDrops() {
