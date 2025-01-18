@@ -36,12 +36,12 @@ public class BoardManager {
                     }
 
                     // Must match slot type
-                    if (card.isMonsterCard() != isMonsterSlot) {
+                    if (card instanceof MonsterCard != isMonsterSlot) {
                         return false;
                     }
 
                     // If monster, ensure only one monster is placed
-                    if (card.isMonsterCard()) {
+                    if (card instanceof MonsterCard){
                         if (!canPlaceMonster) {
                             return false;
                         }
@@ -77,11 +77,11 @@ public class BoardManager {
 
         Card card = (Card) droppedView.getTag();
         // Once a monster is placed, disallow further monster placements
-        if (card.isMonsterCard()) {
+        if (card instanceof MonsterCard){
             canPlaceMonster = false;
         }
 
-        card.setDefense(defense);
+//        card.setDefense(defense);
         droppedView.setRotation(defense ? 90f : 0f);
 
         // Disable further dragging
@@ -90,7 +90,7 @@ public class BoardManager {
 
         droppedView.setOnClickListener(v -> {
             Card c = (Card) v.getTag();
-            if (c.isMonsterCard()) {
+            if (c instanceof MonsterCard){
                 boolean wasDefense = c.isDefense();
                 c.setDefense(!wasDefense);
                 v.setRotation(!wasDefense ? 90f : 0f);

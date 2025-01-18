@@ -184,4 +184,5 @@ public class MainActivity extends AppCompatActivity {
         // Not main phase
         BoardManager.isMainPhase = false;
     }
+
 }
