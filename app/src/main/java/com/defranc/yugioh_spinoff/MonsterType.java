@@ -1,12 +1,12 @@
 package com.defranc.yugioh_spinoff;
 
 public enum MonsterType {
-    SPELLCASTER("SPELLCASTER"),
-    DRAGON("DRAGON"),
-    ZOMBI("ZOMBI"),
-    WARRIOR("WARRIOR"),
-    BEAST("BEAST"),
-    DEMON("DEMON");
+    S("SPELLCASTER"),
+    DR("DRAGON"),
+    Z("ZOMBI"),
+    W("WARRIOR"),
+    B("BEAST"),
+    D("DEMON");
 
     private final String value;
 

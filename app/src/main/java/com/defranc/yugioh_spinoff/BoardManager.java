@@ -22,25 +22,24 @@ public class BoardManager {
                     return true;
 
                 case DragEvent.ACTION_DROP:
-                    // 1) Only allow dropping in Main Phase
                     if (!isMainPhase) {
                         return false;
                     }
                     View droppedView = (View) event.getLocalState();
                     Card card = (Card) droppedView.getTag();
 
-                    // Disallow drop if occupied
+                    // Check for null card
+                    if (card == null) {
+                        return false;
+                    }
+
                     FrameLayout target = (FrameLayout) v;
                     if (target.getChildCount() > 0) {
                         return false;
                     }
-
-                    // Must match slot type
                     if (card.isMonsterCard() != isMonsterSlot) {
                         return false;
                     }
-
-                    // If monster, ensure only one monster is placed
                     if (card.isMonsterCard()) {
                         if (!canPlaceMonster) {
                             return false;
@@ -53,7 +52,6 @@ public class BoardManager {
                                 .create()
                                 .show();
                     } else {
-                        // Trap/magic
                         placeCard(target, droppedView, false);
                     }
                     return true;
@@ -64,7 +62,11 @@ public class BoardManager {
         });
     }
 
-    private static void placeCard(FrameLayout target, View droppedView, boolean defense) {
+    private static void placeCard(
+            FrameLayout target,
+            View droppedView,
+            boolean defense
+    ) {
         ViewGroup oldParent = (ViewGroup) droppedView.getParent();
         oldParent.removeView(droppedView);
 
@@ -76,12 +78,17 @@ public class BoardManager {
         target.addView(droppedView, params);
 
         Card card = (Card) droppedView.getTag();
+        if (card == null) {
+            return; // Ensure tag is not null
+        }
         // Once a monster is placed, disallow further monster placements
         if (card.isMonsterCard()) {
             canPlaceMonster = false;
         }
 
-        card.setDefense(defense);
+        if (card instanceof MonsterCard) {
+            ((MonsterCard) card).changePosition(defense);
+        }
         droppedView.setRotation(defense ? 90f : 0f);
 
         // Disable further dragging
@@ -90,9 +97,12 @@ public class BoardManager {
 
         droppedView.setOnClickListener(v -> {
             Card c = (Card) v.getTag();
+            if (c == null) {
+                return; // Ensure tag is not null
+            }
             if (c.isMonsterCard()) {
-                boolean wasDefense = c.isDefense();
-                c.setDefense(!wasDefense);
+                boolean wasDefense = ((MonsterCard) c).isDefense();
+                ((MonsterCard) c).changePosition(!wasDefense);
                 v.setRotation(!wasDefense ? 90f : 0f);
                 if (wasDefense) {
                     new AlertDialog.Builder(v.getContext())
@@ -110,7 +120,6 @@ public class BoardManager {
                             .show();
                 }
             }
-
         });
     }
 }

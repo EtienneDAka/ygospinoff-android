@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ClipData;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         phaseButton = findViewById(R.id.phase_button);
 
+        populateDeck();
 
         phaseButton.setText("Draw Phase");
         phaseButton.setOnClickListener(v -> advancePhase());
@@ -47,11 +50,34 @@ public class MainActivity extends AppCompatActivity {
         setupAllowedDrops();
     }
 
+    private void populateDeck() {
+        deck.add(new MonsterCard(
+                "Colored Fish",
+                R.drawable.coloredfish_monster_water_b_2750_2000_anaconda0que0reside0en0las0profundidades0de0los0mares0en0busqueda0de0presas0desprevenidas,
+                "Anaconda que reside en las profundidades de los mares en busqueda de presas desprevenidas",
+                2750,
+                2000,
+                MonsterType.B,
+                MonsterAttribute.WATER)
+        );
+        deck.add(new MonsterCard(
+                "alinsection",
+                R.drawable.alinsection_monster_earth_w_2000_1500_un0insecto0con0brazos0y0cabeza0aserrados0necesarios0para0desgarrar0a0sus0victimas0en0un0duelo,
+                "Un insecto con brazos y cabeza aserrados necesarios para desgarrar a sus victimas en un duelo",
+                2000,
+                1500,
+                MonsterType.B,
+                MonsterAttribute.EARTH)
+        );
+
+    }
+
     private void setDragForAllCards(LinearLayout layout) {
         for (int i = 0; i < layout.getChildCount(); i++) {
             View child = layout.getChildAt(i);
             if (child instanceof ImageView) {
                 String resourceName = getResources().getResourceEntryName(child.getId());
+                Log.d("RESOURCENAME", resourceName);
                 Card card = createCard(resourceName);
                 child.setTag(card);
                 setupDrag(child);
@@ -61,32 +87,40 @@ public class MainActivity extends AppCompatActivity {
 
     private Card createCard(String resourceName) {
         String[] parts = resourceName.split("_");
+        Log.d("PARTSSS", Arrays.toString(parts));
         int resID = getResources().getIdentifier(resourceName, "drawable", getPackageName());
-        if (resourceName.contains("_monster")) {
-            return new MonsterCard(
-                    parts[0],
-                    resID,
-                    parts[parts.length - 1],
-                    Integer.parseInt(parts[4]),
-                    Integer.parseInt(parts[5]),
-                    MonsterType.valueOf(parts[2]),
-                    MonsterAttribute.valueOf(parts[3])
-            );
-        } else if (resourceName.contains("_trap")) {
-            return new TrapCard(
-                    parts[0],
-                    resID,
-                    parts[parts.length - 1],
-                    MonsterAttribute.valueOf(parts[2])
-            );
-        } else if (resourceName.contains("_magic")) {
-            return new MagicCard(
-                    parts[0],
-                    resID,
-                    parts[parts.length - 1],
-                    MonsterType.valueOf(parts[2])
-            );
+        Log.d("RESSID", String.valueOf(resID));
+        // Require at least 6 parts
+        if (parts.length < 6) {
+            return null;
         }
+
+        try {
+            String name = parts[0];
+            String description = parts[parts.length - 1];
+
+            if (resourceName.contains("_monster")) {
+                MonsterAttribute attribute = MonsterAttribute.valueOf(parts[2].toUpperCase());
+                MonsterType type = MonsterType.valueOf(parts[3].toUpperCase());
+                int attack = Integer.parseInt(parts[4]);
+                int defense = Integer.parseInt(parts[5]);
+                return new MonsterCard(name, resID, description, attack, defense, type, attribute);
+
+            } else if (resourceName.contains("_trap")) {
+                MonsterAttribute attribute = MonsterAttribute.valueOf(parts[2].toUpperCase());
+                return new TrapCard(name, resID, description, attribute);
+
+            } else if (resourceName.contains("_magic")) {
+                MonsterType type = MonsterType.valueOf(parts[2].toUpperCase());
+                return new MagicCard(name, resID, description, type);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
     }
 
     private void setupAllowedDrops() {

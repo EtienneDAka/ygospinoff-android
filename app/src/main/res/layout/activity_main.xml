@@ -115,6 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="@dimen/hand_padding"
+        android:contentDescription="Scroll view for player hand"
         app:layout_constraintTop_toBottomOf="@id/h9"
         app:layout_constraintBottom_toTopOf="@id/h10"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,52 +129,49 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/colored_fish_monster"
+                android:id="@+id/hugeturtle_monster_water_b_1500_3500_tortuga0mitica0que0ofrece0proteccion0divina0a0sus0companeros0de0duelo"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/colored_fish_monster" />
+                android:contentDescription="hugeturtle_monster_water_b_1500_3500_tortuga0mitica0que0ofrece0proteccion0divina0a0sus0companeros0de0duelo"
+                android:src="@drawable/hugeturtle_monster_water_b_1500_3500_tortuga0mitica0que0ofrece0proteccion0divina0a0sus0companeros0de0duelo" />
 
             <ImageView
-                android:id="@+id/hugeturtle_monster"
+                android:id="@+id/aireater_monster_wind_b_1500_1500_un0monstruo0que0sofoca0a0sus0enemigos0con0estar0cerca0de0ellos"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/hugeturtle_monster" />
+                android:contentDescription="aireater_monster_wind_b_1500_1500_un0monstruo0que0sofoca0a0sus0enemigos0con0estar0cerca0de0ellos"
+                android:src="@drawable/aireater_monster_wind_b_1500_1500_un0monstruo0que0sofoca0a0sus0enemigos0con0estar0cerca0de0ellos" />
 
             <ImageView
-                android:id="@+id/air_eater_monster"
+                android:id="@+id/acidhole_trap_earth_si0un0monstruo0en0el0campo0es0de0tipo0guerrero0sus0puntos0de0ataque0son0reducidos0en05550puntos"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/air_eater_monster" />
+                android:contentDescription="acidhole_trap_earth_si0un0monstruo0en0el0campo0es0de0tipo0guerrero0sus0puntos0de0ataque0son0reducidos0en05550puntos"
+                android:src="@drawable/acidhole_trap_earth_si0un0monstruo0en0el0campo0es0de0tipo0guerrero0sus0puntos0de0ataque0son0reducidos0en05550puntos" />
 
             <ImageView
-                android:id="@+id/acid_hole_trap"
+                android:id="@+id/akihiron_monster_water_b_1000_2000_una0oscura0criatura0que0reside0en0las0profundidades0de0los0siete0mares"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/acid_hole_trap" />
+                android:contentDescription="akihiron_monster_water_b_1000_2000_una0oscura0criatura0que0reside0en0las0profundidades0de0los0siete0mares"
+                android:src="@drawable/akihiron_monster_water_b_1000_2000_una0oscura0criatura0que0reside0en0las0profundidades0de0los0siete0mares" />
 
             <ImageView
-                android:id="@+id/akihiron_monster"
+                android:id="@+id/magnetwarrior_monster_earth_w_1750_2500_guerrero0construido0completamente0de0metal0que0proporciona0mayor0resistencia0durante0el0combate0sacrificando0un0poco0de0agilidad"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/akihiron_monster" />
-
-            <ImageView
-                android:id="@+id/magnet_warrior_monster"
-                android:layout_width="@dimen/card_width"
-                android:layout_height="@dimen/card_height"
-                android:layout_marginEnd="5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/magnet_warrior_monster" />
+                android:contentDescription="magnetwarrior_monster_earth_w_1750_2500_guerrero0construido0completamente0de0metal0que0proporciona0mayor0resistencia0durante0el0combate0sacrificando0un0poco0de0agilidad"
+                android:src="@drawable/magnetwarrior_monster_earth_w_1750_2500_guerrero0construido0completamente0de0metal0que0proporciona0mayor0resistencia0durante0el0combate0sacrificando0un0poco0de0agilidad" />
 
         </LinearLayout>
     </HorizontalScrollView>
@@ -184,6 +182,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="@dimen/hand_padding"
+        android:contentDescription="Scroll view for machine hand"
         app:layout_constraintTop_toBottomOf="@id/h1"
         app:layout_constraintBottom_toTopOf="@id/h2"
         app:layout_constraintStart_toStartOf="parent"
