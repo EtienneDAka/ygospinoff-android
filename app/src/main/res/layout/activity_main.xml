@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <!-- Horizontal guidelines -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.46" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.54" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.82" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/h10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1" />
+
+    <!-- Vertical guidelines -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8029197" />
+
+    <!-- Player hand (bottom carousel) -->
+    <HorizontalScrollView
+        android:id="@+id/hand1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/hand_padding"
+        app:layout_constraintTop_toBottomOf="@id/h9"
+        app:layout_constraintBottom_toTopOf="@id/h10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/player_hand_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/colored_fish_monster"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/colored_fish_monster" />
+
+            <ImageView
+                android:id="@+id/hugeturtle_monster"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/hugeturtle_monster" />
+
+            <ImageView
+                android:id="@+id/air_eater_monster"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/air_eater_monster" />
+
+            <ImageView
+                android:id="@+id/acid_hole_trap"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/acid_hole_trap" />
+
+            <ImageView
+                android:id="@+id/akihiron_monster"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/akihiron_monster" />
+
+            <ImageView
+                android:id="@+id/magnet_warrior_monster"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/magnet_warrior_monster" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Machine hand (top carousel) -->
+    <HorizontalScrollView
+        android:id="@+id/hand2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/hand_padding"
+        app:layout_constraintTop_toBottomOf="@id/h1"
+        app:layout_constraintBottom_toTopOf="@id/h2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/card_back_top1"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backcard" />
+
+            <ImageView
+                android:id="@+id/card_back_top2"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backcard" />
+
+            <ImageView
+                android:id="@+id/card_back_top3"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backcard" />
+
+            <ImageView
+                android:id="@+id/card_back_top4"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backcard" />
+
+            <ImageView
+                android:id="@+id/card_back_top5"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backcard" />
+
+            <ImageView
+                android:id="@+id/card_back_top6"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backcard" />
+
+            <ImageView
+                android:id="@+id/card_back_top7"
+                android:layout_width="@dimen/card_width"
+                android:layout_height="@dimen/card_height"
+                android:layout_marginEnd="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/backcard" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Machine board -->
+    <FrameLayout
+        android:id="@+id/machine_monster_container_1"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h4"
+        app:layout_constraintBottom_toBottomOf="@id/h5"
+        app:layout_constraintStart_toStartOf="@id/v1"
+        app:layout_constraintEnd_toEndOf="@id/v2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/machine_monster_container_2"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h4"
+        app:layout_constraintBottom_toBottomOf="@id/h5"
+        app:layout_constraintStart_toStartOf="@id/v2"
+        app:layout_constraintEnd_toEndOf="@id/v3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/machine_monster_container_3"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h4"
+        app:layout_constraintBottom_toBottomOf="@id/h5"
+        app:layout_constraintStart_toStartOf="@id/v3"
+        app:layout_constraintEnd_toEndOf="@id/v4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/machine_trap_container_1"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h3"
+        app:layout_constraintBottom_toBottomOf="@id/h4"
+        app:layout_constraintStart_toStartOf="@id/v1"
+        app:layout_constraintEnd_toEndOf="@id/v2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/machine_trap_container_2"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h3"
+        app:layout_constraintBottom_toBottomOf="@id/h4"
+        app:layout_constraintStart_toStartOf="@id/v2"
+        app:layout_constraintEnd_toEndOf="@id/v3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/machine_trap_container_3"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h3"
+        app:layout_constraintBottom_toBottomOf="@id/h4"
+        app:layout_constraintStart_toStartOf="@id/v3"
+        app:layout_constraintEnd_toEndOf="@id/v4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <!-- Player board -->
+    <FrameLayout
+        android:id="@+id/player_monster_container_1"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h6"
+        app:layout_constraintBottom_toBottomOf="@id/h7"
+        app:layout_constraintStart_toStartOf="@id/v1"
+        app:layout_constraintEnd_toEndOf="@id/v2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/player_monster_container_2"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h6"
+        app:layout_constraintBottom_toBottomOf="@id/h7"
+        app:layout_constraintStart_toStartOf="@id/v2"
+        app:layout_constraintEnd_toEndOf="@id/v3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/player_monster_container_3"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h6"
+        app:layout_constraintBottom_toBottomOf="@id/h7"
+        app:layout_constraintStart_toStartOf="@id/v3"
+        app:layout_constraintEnd_toEndOf="@id/v4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/player_trap_container_1"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h7"
+        app:layout_constraintBottom_toBottomOf="@id/h8"
+        app:layout_constraintStart_toStartOf="@id/v1"
+        app:layout_constraintEnd_toEndOf="@id/v2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/player_trap_container_2"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h7"
+        app:layout_constraintBottom_toBottomOf="@id/h8"
+        app:layout_constraintStart_toStartOf="@id/v2"
+        app:layout_constraintEnd_toEndOf="@id/v3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <FrameLayout
+        android:id="@+id/player_trap_container_3"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:layout_margin="@dimen/card_margin"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/h7"
+        app:layout_constraintBottom_toBottomOf="@id/h8"
+        app:layout_constraintStart_toStartOf="@id/v3"
+        app:layout_constraintEnd_toEndOf="@id/v4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <!-- Button to move to the next phase -->
+    <Button
+        android:id="@+id/phase_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Draw Phase"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
