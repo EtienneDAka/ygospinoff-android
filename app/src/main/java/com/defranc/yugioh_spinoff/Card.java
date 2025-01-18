@@ -1,15 +1,9 @@
 package com.defranc.yugioh_spinoff;
 
 public class Card {
-    public enum Orientation {
-        ATTACK,
-        DEFENSE
-    }
-
-    private String name;
-    private String description;
-    private Orientation orientation;
-    private int imageResId;
+    private final String name;
+    private final String description;
+    private final int imageResId;
 
     public Card(
             String name,
@@ -19,20 +13,18 @@ public class Card {
         this.name = name;
         this.imageResId = imageResId;
         this.description = description;
-        this.orientation = Orientation.ATTACK;
     }
 
     public String getName() { return name; }
     public String getDescription() { return description; }
-    public Orientation getOrientation() { return orientation; }
     public int getImageResId() { return imageResId; }
 }
 
 class MonsterCard extends Card {
     private int attack;
     private int defense;
-    private MonsterType type;
-    private MonsterAttribute attribute;
+    private final MonsterType type;
+    private final MonsterAttribute attribute;
 
     public MonsterCard (
             String name,
