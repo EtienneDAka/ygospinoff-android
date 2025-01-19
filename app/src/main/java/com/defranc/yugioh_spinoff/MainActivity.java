@@ -247,15 +247,9 @@ public class MainActivity extends AppCompatActivity {
                         topLayout.addView(newCardView);
                     }
 
-                    new AlertDialog.Builder(this)
-                            .setMessage("A new card has been added to your hand: " + newCard.getName())
-                            .setPositiveButton("OK", null)
-                            .show();
+                    Toast.makeText(this, "A new card has been added to your hand: " + newCard.getName(), Toast.LENGTH_SHORT).show();
                 } else {
-                    new AlertDialog.Builder(this)
-                            .setMessage("No more cards in the deck.")
-                            .setPositiveButton("OK", null)
-                            .show();
+                    Toast.makeText(this, "No more cards in the deck.", Toast.LENGTH_SHORT).show();
                 }
                 currentPhase = Phase.MAIN;
                 phaseButton.setText("Main Phase");
