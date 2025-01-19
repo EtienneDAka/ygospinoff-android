@@ -195,60 +195,59 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/card_back_top1"
+                android:id="@+id/acidrain_magic_w_aumenta05550puntos0de0dano0de0un0monstruo0de0tipo0oscuridad"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/backcard" />
+                android:contentDescription="acidrain_magic_w_aumenta05550puntos0de0dano0de0un0monstruo0de0tipo0oscuridad"
+                android:src="@drawable/acidrain_magic_w_aumenta05550puntos0de0dano0de0un0monstruo0de0tipo0oscuridad" />
 
             <ImageView
-                android:id="@+id/card_back_top2"
+                android:id="@+id/alexandritedragon_monster_light_dr_3000_1000_un0dragon0olvidado0en0el0tiempo0que0produce0ceguera0a0aquellos0que0lo0observan0directamente0a0los0ojos"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/backcard" />
+                android:contentDescription="alexandritedragon_monster_light_dr_3000_1000_un0dragon0olvidado0en0el0tiempo0que0produce0ceguera0a0aquellos0que0lo0observan0directamente0a0los0ojos"
+                android:src="@drawable/alexandritedragon_monster_light_dr_3000_1000_un0dragon0olvidado0en0el0tiempo0que0produce0ceguera0a0aquellos0que0lo0observan0directamente0a0los0ojos" />
 
             <ImageView
-                android:id="@+id/card_back_top3"
+                android:id="@+id/alienshocktrooper_monster_earth_w_3000_1500_una0raza0suprema0de0soldado0creado0por0entidades0alienigenas0con0tecnologia0muy0avanzada0a0la0nuestra"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/backcard" />
+                android:contentDescription="alienshocktrooper_monster_earth_w_3000_1500_una0raza0suprema0de0soldado0creado0por0entidades0alienigenas0con0tecnologia0muy0avanzada0a0la0nuestra"
+                android:src="@drawable/alienshocktrooper_monster_earth_w_3000_1500_una0raza0suprema0de0soldado0creado0por0entidades0alienigenas0con0tecnologia0muy0avanzada0a0la0nuestra" />
 
             <ImageView
-                android:id="@+id/card_back_top4"
+                android:id="@+id/alligatorssword_monster_earth_w_1750_500_un0lagarto0capaz0de0mover0su0espada0mas0rapido0que0la0velocidad0del0sonido0misma"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/backcard" />
+                android:contentDescription="alligatorssword_monster_earth_w_1750_500_un0lagarto0capaz0de0mover0su0espada0mas0rapido0que0la0velocidad0del0sonido0misma"
+                android:src="@drawable/alligatorssword_monster_earth_w_1750_500_un0lagarto0capaz0de0mover0su0espada0mas0rapido0que0la0velocidad0del0sonido0misma" />
 
             <ImageView
-                android:id="@+id/card_back_top5"
+                android:id="@+id/allyjustice_monster_dark_dr_3500_1000_un0monstruo0mitico0reconocido0por0traer0justicia0en0aquellos0que0la0necesitan0ejecutando0a0cualquiera0que0se0interponga0en0su0camino"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/backcard" />
+                android:contentDescription="allyjustice_monster_dark_dr_3500_1000_un0monstruo0mitico0reconocido0por0traer0justicia0en0aquellos0que0la0necesitan0ejecutando0a0cualquiera0que0se0interponga0en0su0camino"
+                android:src="@drawable/allyjustice_monster_dark_dr_3500_1000_un0monstruo0mitico0reconocido0por0traer0justicia0en0aquellos0que0la0necesitan0ejecutando0a0cualquiera0que0se0interponga0en0su0camino" />
 
             <ImageView
-                android:id="@+id/card_back_top6"
+                android:id="@+id/amazonseas_monster_water_b_2000_100_una0sirena0que0reside0en0las0profundidades0la0cual0cumple0el0deber0de0proteger0la0sagrada0atlantis"
                 android:layout_width="@dimen/card_width"
                 android:layout_height="@dimen/card_height"
                 android:layout_marginEnd="5dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/backcard" />
+                android:contentDescription="amazonseas_monster_water_b_2000_100_una0sirena0que0reside0en0las0profundidades0la0cual0cumple0el0deber0de0proteger0la0sagrada0atlantis"
+                android:src="@drawable/amazonseas_monster_water_b_2000_100_una0sirena0que0reside0en0las0profundidades0la0cual0cumple0el0deber0de0proteger0la0sagrada0atlantis" />
 
-            <ImageView
-                android:id="@+id/card_back_top7"
-                android:layout_width="@dimen/card_width"
-                android:layout_height="@dimen/card_height"
-                android:layout_marginEnd="5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/backcard" />
         </LinearLayout>
     </HorizontalScrollView>
 

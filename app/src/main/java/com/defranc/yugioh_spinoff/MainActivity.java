@@ -6,12 +6,17 @@ import android.content.ClipData;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import java.util.Random;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         player = new Player("Player");
         machine = new Machine("Machine");
 
+        // Choose a random player to start
+        isPlayerTurn = new Random().nextBoolean();
+
+
         // Link TextViews from the layout
         playerLPTextView = findViewById(R.id.player_lp_text_view);
         machineLPTextView = findViewById(R.id.machine_lp_text_view);
@@ -73,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
             setDragForAllCards(bottomLayout);
         }
 
+        // Enable dragging for existing top-hand cards
+        HorizontalScrollView topScrollView = findViewById(R.id.hand2);
+        if (topScrollView.getChildCount() > 0 && topScrollView.getChildAt(0) instanceof LinearLayout) {
+            LinearLayout topLayout = (LinearLayout) topScrollView.getChildAt(0);
+            setDragForAllCards(topLayout);
+        }
         // Prepare board slots to accept drops
         setupAllowedDrops();
     }
@@ -116,13 +131,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d("PARTSSS", Arrays.toString(parts));
         int resID = getResources().getIdentifier(resourceName, "drawable", getPackageName());
         Log.d("RESSID", String.valueOf(resID));
-        if (parts.length < 6) {
+        if (parts.length < 3) {
             return null;
         }
 
         try {
             String name = parts[0];
             String description = parts[parts.length - 1];
+            String formatDescription = description.replaceAll("0", " ");
+            Log.d("DESCRIPTION", formatDescription);
 
             if (resourceName.contains("_monster")) {
                 MonsterAttribute attribute = MonsterAttribute.valueOf(parts[2].toUpperCase());
@@ -231,6 +248,101 @@ public class MainActivity extends AppCompatActivity {
                 endTurn();
                 break;
         }
+    }
+
+    private void aiPlayCard() {
+        HorizontalScrollView aiHandScrollView = findViewById(R.id.hand2);
+        LinearLayout aiHandLayout = (LinearLayout) aiHandScrollView.getChildAt(0); // asumiendo que el primer hijo es LinearLayout
+        int totalCards = aiHandLayout.getChildCount();
+
+        if (totalCards == 0) {
+            Log.e("MainActivity", "AI has no cards to play.");
+            Toast.makeText(this, "AI has no cards to play.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Seleccionar una carta aleatoria
+        int randomIndex = new Random().nextInt(totalCards);
+        ImageView selectedCardView = (ImageView) aiHandLayout.getChildAt(randomIndex);
+        Card selectedCard = (Card) selectedCardView.getTag();
+
+        if (selectedCard == null) {
+            Log.e("MainActivity", "Selected AI card is null.");
+            Toast.makeText(this, "AI selected an invalid card.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Determinar tipo de carta y encontrar contenedor correspondiente
+        FrameLayout targetContainer = null;
+        if (selectedCard.isMonsterCard()) {
+            targetContainer = findEmptyContainer(new int[]{
+                    R.id.machine_monster_container_1,
+                    R.id.machine_monster_container_2,
+                    R.id.machine_monster_container_3
+            });
+            if (targetContainer == null) {
+                Log.e("MainActivity", "No empty monster containers available for AI to play.");
+                Toast.makeText(this, "AI has no place to deploy a monster.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        else if (selectedCard instanceof TrapCard) {
+            targetContainer = findEmptyContainer(new int[]{
+                    R.id.machine_trap_container_1,
+                    R.id.machine_trap_container_2,
+                    R.id.machine_trap_container_3
+            });
+            if (targetContainer == null) {
+                Log.e("MainActivity", "No empty trap containers available for AI to play.");
+                Toast.makeText(this, "AI has no place to deploy a trap.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        // Mover la carta al contenedor objetivo
+        if (targetContainer != null) {
+            moveCardToContainer(selectedCardView, aiHandLayout, targetContainer);
+            Toast.makeText(this, "AI has played: " + selectedCard.getName(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private FrameLayout findEmptyContainer(int[] containerIds) {
+        for (int id : containerIds) {
+            FrameLayout container = findViewById(id);
+            if (container != null && container.getChildCount() == 0) {
+                return container;
+            }
+        }
+        return null;
+    }
+
+    private void moveCardToContainer(ImageView cardView, LinearLayout currentHand, FrameLayout targetContainer) {
+        // Remover de la mano actual
+        currentHand.removeView(cardView);
+
+        // Agregar al contenedor objetivo
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER
+        );
+        targetContainer.addView(cardView, params);
+
+        // Opcional: Aplicar transformaciones, por ejemplo, rotación si está en posición de defensa
+        if (cardView.getTag() instanceof MonsterCard) {
+            // Por ejemplo, establecer en posición de ataque (0 rotación)
+            cardView.setRotation(0f);
+        }
+        else if (cardView.getTag() instanceof TrapCard) {
+            // Las trampas podrían no necesitar rotación
+            cardView.setRotation(0f);
+        }
+
+        // Deshabilitar el drag para la carta de la máquina
+        cardView.setOnLongClickListener(null);
+        cardView.setOnTouchListener(null);
+
+        // Opcional: Configurar click listener para activar efectos
     }
 
     private void endTurn() {
