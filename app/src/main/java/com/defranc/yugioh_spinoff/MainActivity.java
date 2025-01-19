@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private Phase currentPhase = Phase.DRAW;
     private Button phaseButton;
     private TextView turnInfoTextView;
+    private Player player;
+    private Machine machine;
+    private TextView playerLPTextView;
+    private TextView machineLPTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Populate the deck
         populateDeck();
+
+        // Initialize Player and Machine
+        player = new Player("Player");
+        machine = new Machine("Machine");
+
+        // Link TextViews from the layout
+        playerLPTextView = findViewById(R.id.player_lp_text_view);
+        machineLPTextView = findViewById(R.id.machine_lp_text_view);
+
+        // Set initial LP values
+        updateLPDisplay();
 
         // Set initial phase button text and update turn info
         phaseButton.setText("Draw Phase");
@@ -208,6 +223,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case BATTLE:
+                new AlertDialog.Builder(this)
+                        .setMessage("Battle phase has ended.")
+                        .setPositiveButton("OK", null)
+                        .show();
+
                 endTurn();
                 break;
         }
@@ -243,5 +263,17 @@ public class MainActivity extends AppCompatActivity {
     private void updateTurnInfo() {
         String player = isPlayerTurn ? "Player" : "Machine";
         turnInfoTextView.setText(String.format("Turn: %d\nCurrent: %s", totalTurns, player));
+    }
+
+    private void updateLPDisplay() {
+        playerLPTextView.setText("Player LP: " + player.getLife());
+        machineLPTextView.setText("Machine LP: " + machine.getLife());
+    }
+
+    // Example method to simulate damage
+    public void simulateDamage() {
+        player.takeDamage(500);
+        machine.takeDamage(300);
+        updateLPDisplay(); // Refresh LP display
     }
 }

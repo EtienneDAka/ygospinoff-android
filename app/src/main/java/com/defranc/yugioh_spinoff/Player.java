@@ -32,3 +32,8 @@ public class Player {
 }
 
 //HACER MACHINE EXTENDS PLAYER Y COMPLETAR EL CONSTRUCTOR Y LOS MÉTODOS
+class Machine extends Player {
+    public Machine(String name) {
+        super(name);
+    }
+}

@@ -432,5 +432,26 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@id/h2" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/machine_lp_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player LP: 4000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/player_lp_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Machine LP: 4000"
+        android:textSize="20sp" />
+</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
