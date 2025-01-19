@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,28 +26,39 @@ public class MainActivity extends AppCompatActivity {
 
     private final List<Card> deck = new ArrayList<>();
     private boolean isFirstTurn = true;
+    private boolean isPlayerTurn = true;
+    private int totalTurns = 0;
     private Phase currentPhase = Phase.DRAW;
     private Button phaseButton;
+    private TextView turnInfoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        phaseButton = findViewById(R.id.phase_button);
 
+        // Initialize UI elements
+        phaseButton = findViewById(R.id.phase_button);
+        turnInfoTextView = findViewById(R.id.turn_info_text_view);
+
+        // Populate the deck
         populateDeck();
 
+        // Set initial phase button text and update turn info
         phaseButton.setText("Draw Phase");
+        updateTurnInfo();
+
+        // Set up phase advancement button click listener
         phaseButton.setOnClickListener(v -> advancePhase());
 
-        // Enable dragging of existing bottom-hand cards
+        // Enable dragging for existing bottom-hand cards
         HorizontalScrollView bottomScrollView = findViewById(R.id.hand1);
         if (bottomScrollView.getChildCount() > 0 && bottomScrollView.getChildAt(0) instanceof LinearLayout) {
             LinearLayout bottomLayout = (LinearLayout) bottomScrollView.getChildAt(0);
             setDragForAllCards(bottomLayout);
         }
 
-        // Prepare board slots
+        // Prepare board slots to accept drops
         setupAllowedDrops();
     }
 
@@ -69,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 MonsterType.B,
                 MonsterAttribute.EARTH)
         );
-
     }
 
     private void setDragForAllCards(LinearLayout layout) {
@@ -90,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("PARTSSS", Arrays.toString(parts));
         int resID = getResources().getIdentifier(resourceName, "drawable", getPackageName());
         Log.d("RESSID", String.valueOf(resID));
-        // Require at least 6 parts
         if (parts.length < 6) {
             return null;
         }
@@ -148,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
     private void advancePhase() {
         switch (currentPhase) {
             case DRAW:
-                // Draw new card
                 if (!deck.isEmpty()) {
                     Card newCard = deck.remove(0);
                     ImageView newCardView = new ImageView(this);
@@ -179,14 +188,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 currentPhase = Phase.MAIN;
                 phaseButton.setText("Main Phase");
-                // Enable board drops for monster/trap (one monster per turn)
                 BoardManager.canPlaceMonster = true;
-                // Indicate we are in Main Phase for BoardManager
                 BoardManager.isMainPhase = true;
                 break;
 
             case MAIN:
-                // If first turn, end turn; else go to battle
                 if (isFirstTurn) {
                     new AlertDialog.Builder(this)
                             .setMessage("Your first turn has ended.")
@@ -196,27 +202,46 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     currentPhase = Phase.BATTLE;
                     phaseButton.setText("Battle Phase");
-                    // Not main phase anymore
                     BoardManager.isMainPhase = false;
                 }
                 isFirstTurn = false;
                 break;
 
             case BATTLE:
-                // Next turn => go back to draw
-                currentPhase = Phase.DRAW;
-                phaseButton.setText("Draw Phase");
-                BoardManager.isMainPhase = false;
+                endTurn();
                 break;
         }
     }
 
     private void endTurn() {
-        isFirstTurn = false;
-        phaseButton.setText("Draw Phase");
+        isPlayerTurn = !isPlayerTurn;
+        totalTurns++;
         currentPhase = Phase.DRAW;
-        // Not main phase
+        phaseButton.setText("Draw Phase");
         BoardManager.isMainPhase = false;
+
+        updateTurnInfo();
+
+        if (!isPlayerTurn) {
+            handleMachineTurn();
+        }
     }
 
+    private void handleMachineTurn() {
+        if (!deck.isEmpty()) {
+            Card newCard = deck.remove(0);
+            Log.d("MachineTurn", "Machine drew: " + newCard.getName());
+        }
+
+        new AlertDialog.Builder(this)
+                .setMessage("Machine's turn has ended.")
+                .setPositiveButton("OK", null)
+                .show();
+        endTurn();
+    }
+
+    private void updateTurnInfo() {
+        String player = isPlayerTurn ? "Player" : "Machine";
+        turnInfoTextView.setText(String.format("Turn: %d\nCurrent: %s", totalTurns, player));
+    }
 }
