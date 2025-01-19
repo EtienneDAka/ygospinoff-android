@@ -6,14 +6,12 @@ public class Player {
     protected Deck deck;
     protected String name;
     protected ArrayList<Card> hand;
-    protected Card[][] field = new Card[3][2];
     protected int life = 4000;
 
 //   CONSTRUCTOR
     public Player(String name) {
         this.name = name;
-//        this.deck = deck.createDeck();
-        this.hand = new ArrayList<Card>();
+        this.deck = new Deck();
     }
 
     public int getLife(){
@@ -33,7 +31,12 @@ public class Player {
 
 //HACER MACHINE EXTENDS PLAYER Y COMPLETAR EL CONSTRUCTOR Y LOS MÉTODOS
 class Machine extends Player {
-    public Machine(String name) {
-        super(name);
+    public Machine() {
+        super("Machine");
+    }
+
+    public void drawCard(){
+//        hand.add(deck.drawCard(this.deck));
+//        MOSTRAR EL ROBO DE CARTA
     }
 }
