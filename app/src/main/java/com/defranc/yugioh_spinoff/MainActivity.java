@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private final Deck deck = new Deck();
     private boolean isFirstTurn = true;
     private boolean isPlayerTurn = true;
-    private int totalTurns = 0;
+    private int totalTurns = 1;
     private Phase currentPhase = Phase.DRAW;
     private Button phaseButton;
     private TextView turnInfoTextView;
@@ -338,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "AI has played: " + selectedCard.getName(), Toast.LENGTH_SHORT).show();
         }
     }
-
     private void aiDeclareBattle() {
         FrameLayout[] playerMonsterContainers = new FrameLayout[]{
                 findViewById(R.id.player_monster_container_1),
@@ -352,31 +351,98 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.machine_monster_container_3)
         };
 
+        boolean playerHasMonsters = false;
+
+        for (FrameLayout playerContainer : playerMonsterContainers) {
+            if (playerContainer.getChildCount() > 0) {
+                playerHasMonsters = true;
+                break;
+            }
+        }
+
         for (FrameLayout machineContainer : machineMonsterContainers) {
             if (machineContainer.getChildCount() > 0) {
                 ImageView machineMonsterView = (ImageView) machineContainer.getChildAt(0);
                 MonsterCard machineMonster = (MonsterCard) machineMonsterView.getTag();
 
-                for (FrameLayout playerContainer : playerMonsterContainers) {
-                    if (playerContainer.getChildCount() > 0) {
-                        ImageView playerMonsterView = (ImageView) playerContainer.getChildAt(0);
-                        MonsterCard playerMonster = (MonsterCard) playerMonsterView.getTag();
+                if (playerHasMonsters) {
+                    for (FrameLayout playerContainer : playerMonsterContainers) {
+                        if (playerContainer.getChildCount() > 0) {
+                            ImageView playerMonsterView = (ImageView) playerContainer.getChildAt(0);
+                            MonsterCard playerMonster = (MonsterCard) playerMonsterView.getTag();
 
-                        if (machineMonster.getAttack() > playerMonster.getDefense()) {
-                            player.takeDamage(machineMonster.getAttack() - playerMonster.getDefense());
-                            playerContainer.removeView(playerMonsterView);
-                            Toast.makeText(this, "AI's " + machineMonster.getName() + " destroyed " + playerMonster.getName(), Toast.LENGTH_SHORT).show();
-                        } else {
-                            machine.takeDamage(playerMonster.getDefense() - machineMonster.getAttack());
-                            machineContainer.removeView(machineMonsterView);
-                            Toast.makeText(this, "Player's " + playerMonster.getName() + " destroyed " + machineMonster.getName(), Toast.LENGTH_SHORT).show();
+                            String machineMonsterPosition = machineMonster.isDefense() ? "defense" : "attack";
+                            String playerMonsterPosition = playerMonster.isDefense() ? "defense" : "attack";
+                            int playerMonsterPoints = playerMonster.isDefense() ? playerMonster.getDefense() : playerMonster.getAttack();
+
+                            if (machineMonster.getAttack() > playerMonsterPoints) {
+                                player.takeDamage(machineMonster.getAttack() - playerMonsterPoints);
+                                playerContainer.removeView(playerMonsterView);
+
+                                showBattleResultPopup(machineMonster, playerMonster, machineMonsterPosition, playerMonsterPosition, true);
+                            } else {
+                                machine.takeDamage(playerMonsterPoints - machineMonster.getAttack());
+                                machineContainer.removeView(machineMonsterView);
+
+                                showBattleResultPopup(machineMonster, playerMonster, machineMonsterPosition, playerMonsterPosition, false);
+                            }
+                            updateLPDisplay();
+                            break;
                         }
-                        updateLPDisplay();
-                        break;
                     }
+                } else {
+                    // Attack directly to the player
+                    player.takeDamage(machineMonster.getAttack());
+                    showDirectAttackPopup(machineMonster);
+                    updateLPDisplay();
                 }
             }
         }
+    }
+
+    private void showBattleResultPopup(MonsterCard machineMonster, MonsterCard playerMonster, String machineMonsterPosition, String playerMonsterPosition, boolean machineWins) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View customLayout = getLayoutInflater().inflate(R.layout.battle_result_popup, null);
+        builder.setView(customLayout);
+
+        TextView machineMonsterName = customLayout.findViewById(R.id.machine_monster_name);
+        TextView machineMonsterAttack = customLayout.findViewById(R.id.machine_monster_attack);
+        TextView playerMonsterName = customLayout.findViewById(R.id.player_monster_name);
+        TextView playerMonsterPoints = customLayout.findViewById(R.id.player_monster_points);
+        TextView battleResult = customLayout.findViewById(R.id.battle_result);
+
+        machineMonsterName.setText(machineMonster.getName() + " (" + machineMonsterPosition + ")");
+        machineMonsterAttack.setText("Attack: " + machineMonster.getAttack());
+        playerMonsterName.setText(playerMonster.getName() + " (" + playerMonsterPosition + ")");
+        playerMonsterPoints.setText(playerMonsterPosition.equals("defense") ? "Defense: " + playerMonster.getDefense() : "Attack: " + playerMonster.getAttack());
+
+        if (machineWins) {
+            battleResult.setText("Machine's " + machineMonster.getName() + " destroyed " + playerMonster.getName());
+        } else {
+            battleResult.setText("Player's " + playerMonster.getName() + " destroyed " + machineMonster.getName());
+        }
+
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showDirectAttackPopup(MonsterCard machineMonster) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View customLayout = getLayoutInflater().inflate(R.layout.direct_attack_popup, null);
+        builder.setView(customLayout);
+
+        TextView machineMonsterName = customLayout.findViewById(R.id.machine_monster_name);
+        TextView machineMonsterAttack = customLayout.findViewById(R.id.machine_monster_attack);
+        TextView directAttackResult = customLayout.findViewById(R.id.direct_attack_result);
+
+        machineMonsterName.setText(machineMonster.getName() + " (attack)");
+        machineMonsterAttack.setText("Attack: " + machineMonster.getAttack());
+        directAttackResult.setText("Machine's " + machineMonster.getName() + " attacked directly!");
+
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private FrameLayout findEmptyContainer(int[] containerIds) {
