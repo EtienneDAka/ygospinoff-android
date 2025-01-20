@@ -95,30 +95,22 @@ public class BoardManager {
         droppedView.setOnLongClickListener(null);
         droppedView.setOnTouchListener(null);
 
+        MainActivity activity = (MainActivity) target.getContext();
         droppedView.setOnClickListener(v -> {
-            Card c = (Card) v.getTag();
-            if (c == null) {
-                return; // Ensure tag is not null
-            }
-            if (c.isMonsterCard()) {
-                boolean wasDefense = ((MonsterCard) c).isDefense();
-                ((MonsterCard) c).changePosition(!wasDefense);
-                v.setRotation(!wasDefense ? 90f : 0f);
-                if (wasDefense) {
-                    new AlertDialog.Builder(v.getContext())
+            if (!activity.isInBattlePhase) {
+                Card c = (Card) v.getTag();
+                if (c instanceof MonsterCard) {
+                    boolean wasDefense = ((MonsterCard) c).isDefense();
+                    ((MonsterCard) c).changePosition(!wasDefense);
+                    v.setRotation(!wasDefense ? 90f : 0f);
+                    new AlertDialog.Builder(activity)
                             .setTitle("Position")
-                            .setMessage("This monster is now in Attack position")
+                            .setMessage("This monster is now in " + (!wasDefense ? "Defense" : "Attack") + " position")
                             .setPositiveButton("OK", null)
-                            .create()
-                            .show();
-                } else {
-                    new AlertDialog.Builder(v.getContext())
-                            .setTitle("Position")
-                            .setMessage("This monster is now in Defense position")
-                            .setPositiveButton("OK", null)
-                            .create()
                             .show();
                 }
+            } else {
+                activity.handleMonsterCardClick(v);
             }
         });
     }

@@ -7,45 +7,45 @@
     android:background="@drawable/popup_background">
 
     <TextView
-        android:id="@+id/machine_monster_name"
+        android:id="@+id/attacker_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Machine Monster"
+        android:text="Attacker Name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
 
     <TextView
-        android:id="@+id/machine_monster_attack"
+        android:id="@+id/attacker_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Attack: 0"
+        android:text="ATK: 0 / DEF: 0"
         android:textSize="16sp"
         android:layout_marginBottom="16dp" />
 
     <TextView
-        android:id="@+id/player_monster_name"
+        android:id="@+id/target_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Player Monster"
+        android:text="Target Name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
 
     <TextView
-        android:id="@+id/player_monster_points"
+        android:id="@+id/target_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Points: 0"
+        android:text="ATK: 0 / DEF: 0"
         android:textSize="16sp"
         android:layout_marginBottom="16dp" />
 
     <TextView
-        android:id="@+id/battle_result"
+        android:id="@+id/battle_outcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Battle Result"
-        android:textSize="18sp"
+        android:text="Battle Outcome"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 

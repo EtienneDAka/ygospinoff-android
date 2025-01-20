@@ -30,6 +30,7 @@ class MonsterCard extends Card {
     private final MonsterType type;
     private final MonsterAttribute attribute;
     private boolean isDefense;
+    private boolean hasAttacked = false;
 
     public MonsterCard (
             String name,
@@ -77,6 +78,13 @@ class MonsterCard extends Card {
     }
     public void setAttack(int attack) {
         this.attack = attack;
+    }
+    public boolean hasAttacked() {
+        return hasAttacked;
+    }
+
+    public void setHasAttacked(boolean hasAttacked) {
+        this.hasAttacked = hasAttacked;
     }
 }
 

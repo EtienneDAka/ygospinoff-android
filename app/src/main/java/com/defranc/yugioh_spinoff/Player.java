@@ -27,6 +27,10 @@ public class Player {
         life -= dmg;
 //        MOSTRAR LA PÉRDIDA DE VIDA
     }
+
+    public void setLife(int life){
+        this.life = life;
+    }
 }
 
 //HACER MACHINE EXTENDS PLAYER Y COMPLETAR EL CONSTRUCTOR Y LOS MÉTODOS

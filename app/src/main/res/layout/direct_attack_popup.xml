@@ -7,28 +7,28 @@
     android:background="@drawable/popup_background">
 
     <TextView
-        android:id="@+id/machine_monster_name"
+        android:id="@+id/attacker_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Machine Monster"
+        android:text="Attacker Name"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp" />
 
     <TextView
-        android:id="@+id/machine_monster_attack"
+        android:id="@+id/attacker_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Attack: 0"
+        android:text="ATK: 0"
         android:textSize="16sp"
         android:layout_marginBottom="16dp" />
 
     <TextView
-        android:id="@+id/direct_attack_result"
+        android:id="@+id/direct_attack_outcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Direct Attack Result"
-        android:textSize="18sp"
+        android:text="Direct Attack Outcome"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
